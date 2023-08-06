@@ -13,7 +13,8 @@ export default function Home() {
   }
   React.useEffect(() => {
     handleGetData();
-  }, [])
+  }, []);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
