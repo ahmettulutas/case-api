@@ -11,6 +11,7 @@ export async function POST(request: NextRequest, res: NextResponse<any>) {
     await newUser.save();
     return NextResponse.json({message:"Signup completed!"},{ status:201})
   } catch (err: any) {
+    console.log(err)
     return NextResponse.json({error: err}, {status: 500})
   }
 };
@@ -21,6 +22,7 @@ export const GET = async (request: NextRequest, res: NextResponse<any>) => {
     const allPost = await User.collection.find({}).toArray();
     return  NextResponse.json({allPost}, {status: 201})
   } catch (err) {
+    console.log(err)
     return NextResponse.json({error: err}, {status: 500})
   }
 };
