@@ -18,7 +18,6 @@ export async function POST(request: NextRequest, res: NextResponse<any>) {
 export const GET = async (request: NextRequest, res: NextResponse<any>) => {
   try {
     await connect();
-    User.collection.dropIndex("id_1");
     const allPost = await User.collection.find({}).toArray();
     return  NextResponse.json({allPost}, {status: 201})
   } catch (err) {
