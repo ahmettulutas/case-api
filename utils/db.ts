@@ -1,14 +1,12 @@
 import mongoose from "mongoose";
-const uri = "mongodb+srv://ahmetulutas:JNRgzJ6g9gnnLA1n@paramtechfe.rmjz2ym.mongodb.net/?retryWrites=true&w=majority";
+
 const connect = async () => {
-  if(!uri) {
+  if(!process.env.MONGODB_URI) {
     throw new Error(`Connection failed! No mongo db uri has been found`);
   }
   try {
-    await mongoose.connect(uri);
-    console.log("CONNECTED");
+    await mongoose.connect(process.env.MONGODB_URI);
   } catch (error) {
-    console.log("CONNECTION FAILED")
     throw new Error(`Connection failed! ${error}`);
   }
 };
