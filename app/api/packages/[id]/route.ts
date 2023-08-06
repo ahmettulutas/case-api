@@ -1,15 +1,26 @@
 import User from "@/models/User";
 import connect from "@/utils/db";
 import type { NextApiRequest, NextApiResponse } from 'next';
+import { NextResponse } from "next/server";
 
-export default async function handler (request: NextApiRequest,
-  res: NextApiResponse<any>) {
-  const newPost = new User(JSON.parse(request.body));
+export async function POST(request: Request, res: NextApiResponse<any>) {
+  const body = await request.json();
+  const newUser = new User(body);
   try {
     await connect();
-    await newPost.save();
-    return res.status(200).json({ success: "User signed up!" })
+    await newUser.save();
+    return NextResponse.json({message:"Signup completed!"},{ status:201})
+  } catch (err: any) {
+    return NextResponse.json({error: err}, {status: 500})
+  }
+};
+export const GET = async (request: NextApiRequest, res: NextApiResponse<any>) => {
+  try {
+    await connect();
+    User.collection.dropIndex("id_1");
+    const allPost = await User.collection.find({}).toArray();
+    return  NextResponse.json({allPost}, {status: 201})
   } catch (err) {
-    return res.status(500).json({ error: "User has not been created" })
+    return NextResponse.error()
   }
 };
