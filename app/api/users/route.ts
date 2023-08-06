@@ -21,6 +21,6 @@ export const GET = async (request: NextRequest, res: NextResponse<any>) => {
     const allPost = await User.collection.find({}).toArray();
     return  NextResponse.json({allPost}, {status: 201})
   } catch (err) {
-    return NextResponse.error()
+    return NextResponse.json({error: err}, {status: 500})
   }
 };
