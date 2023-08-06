@@ -1,9 +1,9 @@
 import User from "@/models/User";
 import connect from "@/utils/db";
-import type { NextApiRequest, NextApiResponse } from 'next';
-import { NextResponse } from "next/server";
+import type { NextApiResponse } from 'next';
+import { NextRequest, NextResponse } from "next/server";
 
-export async function POST(request: Request, res: NextApiResponse<any>) {
+export async function POST(request: NextRequest, res: NextResponse<any>) {
   const body = await request.json();
   const newUser = new User(body);
   try {
@@ -14,7 +14,7 @@ export async function POST(request: Request, res: NextApiResponse<any>) {
     return NextResponse.json({error: err}, {status: 500})
   }
 };
-export const GET = async (request: NextApiRequest, res: NextApiResponse<any>) => {
+export const GET = async (request: NextRequest, res: NextResponse<any>) => {
   try {
     await connect();
     User.collection.dropIndex("id_1");
