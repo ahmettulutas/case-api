@@ -1,26 +1,14 @@
-import User from "@/models/User";
-import connect from "@/utils/db";
-import type { NextApiRequest, NextApiResponse } from 'next';
 import { NextRequest, NextResponse } from "next/server";
+import connect from "@/utils/db";
+import Packages from "@/models/Packages";
 
-export async function POST(request: NextRequest, res: NextResponse<any>) {
-  const body = await request.json();
-  const newUser = new User(body);
+export const GET = async (request: NextRequest, {params}: { params: { id: string } }) => {
+  const { id } = params;
   try {
     await connect();
-    await newUser.save();
-    return NextResponse.json({message:"Signup completed!"},{ status:201})
-  } catch (err: any) {
-    return NextResponse.json({error: err}, {status: 500})
-  }
-};
-export const GET = async (request: NextRequest, res: NextResponse<any>) => {
-  try {
-    await connect();
-    User.collection.dropIndex("id_1");
-    const allPost = await User.collection.find({}).toArray();
-    return  NextResponse.json({allPost}, {status: 201})
+    const post = await Packages.findById(id);
+    return new NextResponse(JSON.stringify(post), { status: 200 });
   } catch (err) {
-    return NextResponse.error()
+    return new NextResponse("Database Error", { status: 500 });
   }
 };

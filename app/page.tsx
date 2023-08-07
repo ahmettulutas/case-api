@@ -1,38 +1,37 @@
 "use client";
+import { generateDummyPackageItem } from '@/helpers/generateFakePackage';
 import React from 'react';
 
 export default function Home() {
+
   const [form, setForm] = React.useState({ fullName: "", email: "" });
-  const [data, setData] = React.useState([]);
+  const [loading, setLoading] = React.useState(false);
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setForm(prev => ({ ...prev, [name]: value }))
   }
-  const handleGetData = () => {
-    fetch("/api/users").then((res) => res.json()).then(data => setData(data))
-  }
-  React.useEffect(() => {
-    handleGetData();
-  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
+      setLoading(true);
       await fetch("/api/users", {
         method: "POST",
-        body: JSON.stringify({
-          ...form
-        }),
+        body: JSON.stringify({ ...form }),
       });
-    } catch (err) {
-      console.log(err);
+    } catch (err: any) {
+      throw new Error(err);
     }
+    setLoading(false)
   };
+
   return (
     <form className='flex flex-col gap-4 m-10' onSubmit={handleSubmit}>
+      <h1 className='text-center text-bold text-violet-900'>TEST SIGN UP</h1>
       <input className="border-2 border-gray-800 p-2" name="fullName" onChange={handleChange} type="text" placeholder='name' />
       <input className="border-2 border-gray-800 p-2" name="email" onChange={handleChange} type="text" placeholder='email' />
-      <button className="border-2 border-gray-800 p-2" type="submit">SEND</button>
-      <span>{JSON.stringify(data)}</span>
-    </form>)
+      <button className="bg-gray-100 hover:bg-gray-300 border-2 border-gray-800 p-2" type="submit">TEST SIGNUP POST</button>
+      {loading ? <span>Loading...</span> : null}
+    </form>
+  )
 }

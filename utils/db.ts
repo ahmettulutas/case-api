@@ -11,7 +11,7 @@ const connect = async () => {
   } catch (error) {
     throw new Error(`Connection failed! ${error}`);
   }
-    }
+   }
 };
 
 export default connect;

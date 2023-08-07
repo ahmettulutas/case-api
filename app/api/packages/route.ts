@@ -1,26 +1,31 @@
-import User from "@/models/User";
+import Packages from "@/models/Packages";
 import connect from "@/utils/db";
-import type { NextApiResponse } from 'next';
 import { NextRequest, NextResponse } from "next/server";
 
-export async function POST(request: NextRequest, res: NextResponse<any>) {
+export const POST = async (request: NextRequest, res: NextResponse<any>) => {
   const body = await request.json();
-  const newUser = new User(body);
+  const {code, ...rest} = body;
+  if(code !== process.env.ADD_PACKAGE_CODE) {
+    return NextResponse.json({ error: "Please make sure you have the right code" }, { status: 500 })
+  }
+  else {
+  const newPackage = new Packages(rest);
   try {
     await connect();
-    await newUser.save();
-    return NextResponse.json({message:"Signup completed!"},{ status:201})
+    newPackage.save();
+    return NextResponse.json({ message:"Packages have been created.", package: body },{ status:201 })
   } catch (err: any) {
-    return NextResponse.json({error: err}, {status: 500})
+    return NextResponse.json({ error: err }, { status: 500 })
+  }
   }
 };
+
 export const GET = async (request: NextRequest, res: NextResponse<any>) => {
   try {
     await connect();
-    User.collection.dropIndex("id_1");
-    const allPost = await User.collection.find({}).toArray();
-    return  NextResponse.json({allPost}, {status: 201})
+    const allPackages = await Packages.collection.find({}).toArray();
+    return  NextResponse.json({allPackages}, {status: 201})
   } catch (err) {
-    return NextResponse.error()
+    return NextResponse.json({error: err}, {status: 500});
   }
 };
