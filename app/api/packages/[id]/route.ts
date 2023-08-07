@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
-import connect from "@/utils/db";
+
 import Packages from "@/models/Packages";
+import connect from "@/utils/db";
 
 export const GET = async (request: NextRequest, {params}: { params: { id: string } }) => {
   const { id } = params;

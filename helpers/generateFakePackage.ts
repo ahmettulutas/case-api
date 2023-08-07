@@ -7,17 +7,17 @@ export const generateDummyPackageItem = () => {
   const details = [
     faker.commerce.productMaterial(),
     faker.commerce.productAdjective(),
-    faker.commerce.product(),
+    faker.commerce.productDescription(),
   ];
   
   const tags = [
     faker.commerce.department(),
-    faker.commerce.product(),
-    faker.commerce.productDescription(),
+    faker.commerce.productAdjective(),
+    faker.commerce.productAdjective(),
   ];
   
   const amount = faker.number.int({ max: 200 });
-  const currency = '₺';
+  const currency = "₺";
 
   return {
     imagePath,

@@ -11,9 +11,7 @@ module.exports = {
     jest: true,
     node: true,
   },
-  plugins: [
-    "react-hooks"
-  ],
+  plugins: ["react-hooks"],
   settings: {
     react: {
       version: "detect",
@@ -57,15 +55,7 @@ module.exports = {
     "import/order": [
       "warn",
       {
-        groups: [
-          "builtin",
-          "external",
-          [
-            "parent",
-            "sibling"
-          ],
-          "index"
-        ],
+        groups: ["builtin", "external", ["parent", "sibling"], "index"],
         "newlines-between": "always",
         pathGroups: [
           {
@@ -80,7 +70,8 @@ module.exports = {
           },
         ],
         alphabetize: {
-          order: "asc" /* sort in ascending order. Options: ['ignore', 'asc', 'desc'] */,
+          order:
+            "asc" /* sort in ascending order. Options: ['ignore', 'asc', 'desc'] */,
           caseInsensitive: true /* ignore case. Options: [true, false] */,
         },
       },
@@ -89,25 +80,17 @@ module.exports = {
     "jsx-a11y/anchor-is-valid": "off",
     "react/prop-types": "off",
     "react/display-name": "off",
-    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/rules-of-hooks": "error", 
     "react-hooks/exhaustive-deps": "warn",
     "react/jsx-uses-react": "off",
     "react/react-in-jsx-scope": "off",
     "react/self-closing-comp": "warn",
-    "quotes": [
-      "error",
-      "double"
-    ],
-    "semi": [
-      "error",
-      "always"
-    ]
+    "quotes": ["error", "double"],
+     "semi": ["error", "always"]
   },
   overrides: [
     {
-      files: [
-        "**/*.ts?(x)"
-      ],
+      files: ["**/*.ts?(x)"],
       parser: "@typescript-eslint/parser",
       parserOptions: {
         ecmaVersion: 2018,
@@ -120,10 +103,7 @@ module.exports = {
       },
       settings: {
         "import/parsers": {
-          "@typescript-eslint/parser": [
-            ".ts",
-            ".tsx"
-          ],
+          "@typescript-eslint/parser": [".ts", ".tsx"],
         },
         "import/resolver": {
           typescript: {
