@@ -29,8 +29,8 @@ export default function Packages() {
       setError("Please provide the code");
     }
     else {
-
       try {
+        setError("");
         setLoading(true);
         await fetch("/api/packages", {
           method: "POST",
@@ -49,7 +49,7 @@ export default function Packages() {
       <input type="password" className="border-2 border-gray-800 p-2" onChange={handleChange} placeholder='password' />
       {error ? <span className='mt-[-1rem] text-red-500'>{error}</span> : null}
       <button className="bg-gray-100 hover:bg-gray-300 border-2 border-gray-800 p-2" type="submit">POST PACKAGE WITH RANDOM DATA</button>
-      <button className="bg-gray-100 hover:bg-gray-300 border-2 border-gray-800 p-2" onClick={handleGetData}>TEST PAYMENT GET</button>
+      <button className="bg-gray-100 hover:bg-gray-300 border-2 border-gray-800 p-2" onClick={handleGetData}>TEST GET PACKAGES ENDPOINT</button>
       {loading ? <span>Loading...</span> : null}
       {data ? <span>{JSON.stringify(data)}</span> : null}
     </form>

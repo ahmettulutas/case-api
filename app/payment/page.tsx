@@ -39,7 +39,7 @@ export default function Packages() {
 
       </form>
       <div className='flex flex-col gap-4 m-10'>
-        <button className="bg-gray-100 hover:bg-gray-300 border-2 border-gray-800 p-2" onClick={handleGetData}>TEST PAYMENT GET</button>
+        <button className="bg-gray-100 hover:bg-gray-300 border-2 border-gray-800 p-2" onClick={handleGetData}>TEST GET PAYMENT ENDPOINT</button>
         {loading ? <span>Loading...</span> : null}
         {data ? <span>{JSON.stringify(data)}</span> : null}
       </div>
