@@ -7,7 +7,7 @@ export default function Packages() {
   const [loading, setLoading] = React.useState(false);
   const [data, setData] = React.useState();
   const [postData, setPostData] = React.useState();
-  const fakeData = generateDummyPayment();
+
   const handleGetData = () => {
     setLoading(true);
     fetch("/api/payment").then((res) => res.json()).then(data => {
@@ -17,7 +17,7 @@ export default function Packages() {
   };
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
+    const fakeData = generateDummyPayment();
     try {
       setLoading(true);
       await fetch("/api/payment", {
