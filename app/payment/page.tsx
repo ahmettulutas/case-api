@@ -34,14 +34,15 @@ export default function Packages() {
 
       <form className='flex flex-col gap-4 m-10' onSubmit={handleSubmit}>
         <h1 className='text-center text-bold text-violet-900'>TEST PAYMENT</h1>
-        {error ? <span className='mt-[-1rem] text-red-500'>{error}</span> : null}
         <button className="bg-gray-100 hover:bg-gray-300 border-2 border-gray-800 p-2" type="submit">POST PAYMENT WITH RANDOM DATA</button>
-
       </form>
       <div className='flex flex-col gap-4 m-10'>
         <button className="bg-gray-100 hover:bg-gray-300 border-2 border-gray-800 p-2" onClick={handleGetData}>TEST GET PAYMENT ENDPOINT</button>
-        {loading ? <span>Loading...</span> : null}
         {data ? <span>{JSON.stringify(data)}</span> : null}
+      </div>
+      <div className='flex flex-col gap-4 m-10'>
+        {loading ? <span>Loading...</span> : null}
+        {error ? <span className='mt-[-1rem] text-red-500'>{error}</span> : null}
       </div>
     </div>
   )
