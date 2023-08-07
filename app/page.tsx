@@ -1,8 +1,6 @@
 "use client";
 import React from "react";
 
-import { generateDummyPackageItem } from "@/helpers/generateFakePackage";
-
 export default function Home() {
   const initialFormState = { fullName: "", email: "" };
 
