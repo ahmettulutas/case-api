@@ -3,8 +3,9 @@ import { generateDummyPackageItem } from '@/helpers/generateFakePackage';
 import React from 'react';
 
 export default function Home() {
+  const initialFormState = { fullName: "", email: "" };
 
-  const [form, setForm] = React.useState({ fullName: "", email: "" });
+  const [form, setForm] = React.useState(initialFormState);
   const [loading, setLoading] = React.useState(false);
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -19,6 +20,7 @@ export default function Home() {
         method: "POST",
         body: JSON.stringify({ ...form }),
       });
+      setForm(initialFormState);
     } catch (err: any) {
       throw new Error(err);
     }
