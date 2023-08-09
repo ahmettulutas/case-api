@@ -13,8 +13,8 @@ export const POST = async (request: NextRequest, res: NextResponse<any>) => {
   const newPackage = new Packages(rest);
   try {
     await connect();
-    newPackage.save();
-    return NextResponse.json({ message:"Packages have been created.", package: body },{ status:201 });
+    await newPackage.save();
+    return NextResponse.json({ message:"Packages have been created.", package: newPackage },{ status:201 });
   } catch (err: any) {
     return NextResponse.json({ error: err }, { status: 500 });
   }

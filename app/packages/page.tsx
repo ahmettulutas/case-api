@@ -5,7 +5,7 @@ import React from "react";
 
 export default function Packages() {
 
-  const [code, setCode] = React.useState("");
+  /*   const [code, setCode] = React.useState(""); */
   const [error, setError] = React.useState("");
   const [loading, setLoading] = React.useState(false);
   const [packageId, setPackageId] = React.useState("");
@@ -18,18 +18,6 @@ export default function Packages() {
       setBulkData(data);
       setLoading(false);
     });
-  };
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { value, name } = e.target;
-    switch (name) {
-      case "password":
-        setCode(value);
-      case "packageId":
-        setPackageId(value);
-      default:
-        return;
-    }
   };
   /* 
     const handlePost = async (e: React.FormEvent) => {
@@ -50,9 +38,9 @@ export default function Packages() {
           throw new Error(err);
         }
         setLoading(false);
-        setCode("");
       };
     }; */
+
   const handleGetById = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!packageId) {
@@ -76,7 +64,14 @@ export default function Packages() {
     <div className='flex flex-col gap-8 m-10'>
       <h1 className='text-center text-bold text-violet-900'>TEST PACKAGES ENDPOINTS</h1>
       {/*       <form onSubmit={handlePost} className='flex flex-col gap-4'>
-        <input name="password" type="password" className="border-2 border-gray-800 p-2" onChange={handleChange} placeholder='password' />
+        <input
+          value={code}
+          name="password"
+          type="password"
+          className="border-2 border-gray-800 p-2"
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => setCode(e.target.value)}
+          placeholder='password'
+        />
         <button className="bg-gray-100 hover:bg-gray-300 border-2 border-gray-800 p-2" type="submit">POST PACKAGE WITH RANDOM DATA</button>
       </form> */}
       <div className='flex flex-col gap-4'>
@@ -84,7 +79,14 @@ export default function Packages() {
         {bulkData ? <span className="inline-block mt-2 h-40 overflow-scroll">{JSON.stringify(bulkData)}</span> : null}
       </div>
       <form className='flex flex-col gap-4' onSubmit={handleGetById}>
-        <input value={packageId} name="packageId" type="text" className="border-2 border-gray-800 p-2" onChange={handleChange} placeholder='Enter Package Id' />
+        <input
+          value={packageId}
+          name="packageId"
+          type="text"
+          className="border-2 border-gray-800 p-2"
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPackageId(e.target.value)}
+          placeholder='Enter Package Id'
+        />
         <button className="bg-gray-100 hover:bg-gray-300 border-2 border-gray-800 p-2" type="submit">TEST GET PACKAGE BY ID</button>
         {singleData ? <span className="inline-block mt-2">{JSON.stringify(singleData)}</span> : null}
       </form>

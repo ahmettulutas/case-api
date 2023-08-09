@@ -7,7 +7,7 @@ export const generateDummyPackageItem = () => {
   const details = [
     faker.commerce.productMaterial(),
     faker.commerce.productAdjective(),
-    faker.commerce.productDescription(),
+    faker.commerce.productAdjective(),
   ];
   
   const tags = [
@@ -18,6 +18,8 @@ export const generateDummyPackageItem = () => {
   
   const amount = faker.number.int({ max: 200 });
   const currency = "₺";
+  const moreInformation = faker.lorem.paragraph({min:4, max:10});
+  const price = faker.commerce.price();
 
   return {
     imagePath,
@@ -26,6 +28,8 @@ export const generateDummyPackageItem = () => {
     tags,
     amount,
     currency,
+    moreInformation,
+    price
   };
 };
 
