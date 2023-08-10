@@ -31,8 +31,8 @@ export default function Home() {
   return (
     <form className='flex flex-col gap-4 m-10' onSubmit={handleSubmit}>
       <h1 className='text-center text-bold text-violet-900'>TEST SIGN UP ENDPOINTS</h1>
-      <input className="border-2 border-gray-800 p-2" name="fullName" onChange={handleChange} type="text" placeholder='name' />
-      <input className="border-2 border-gray-800 p-2" name="email" onChange={handleChange} type="text" placeholder='email' />
+      <input value={form.fullName} className="border-2 border-gray-800 p-2" name="fullName" onChange={handleChange} type="text" placeholder='name' />
+      <input value={form.email} className="border-2 border-gray-800 p-2" name="email" onChange={handleChange} type="text" placeholder='email' />
       <button className="bg-gray-100 hover:bg-gray-300 border-2 border-gray-800 p-2" type="submit">TEST SIGNUP POST</button>
       {loading ? <span>Loading...</span> : null}
       {data ? <span>{JSON.stringify(data)}</span> : null}
