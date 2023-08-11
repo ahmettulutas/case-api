@@ -18,7 +18,7 @@ export const generateDummyPackageItem = () => {
   
   const amount = faker.number.int({ max: 200 });
   const currency = "₺";
-  const moreInformation = faker.lorem.paragraph({min:4, max:10});
+  const moreInformation = faker.lorem.paragraph({ min:4, max:10 });
   const price = faker.commerce.price();
 
   return {

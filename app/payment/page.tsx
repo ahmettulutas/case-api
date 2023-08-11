@@ -1,47 +1,67 @@
 "use client";
 import React from "react";
 
+import ActionButton, { methods } from "@/components/ActionButton";
+import JsonContainer from "@/components/JsonContainer";
 import { generateDummyPayment } from "@/helpers/generateFakePayment";
-
 export default function Packages() {
   const [loading, setLoading] = React.useState(false);
-  const [data, setData] = React.useState();
+  const [data, setData] = React.useState("");
+  const [error, setError] = React.useState("");
   const [postData, setPostData] = React.useState();
+  const [dummyData, setDummyData] = React.useState<null | Record<string, any>>(null);
 
-  const handleGetData = () => {
+  React.useEffect(() => {
+    const data = generateDummyPayment();
+    setDummyData(data);
+  }, []);
+
+
+  const handleGetData = async () => {
     setLoading(true);
-    fetch("/api/payment").then((res) => res.json()).then(data => {
-      setData(data);
+    setError("");
+    try {
+      const response = await fetch("/api/payment");
+      const responseData = await response.json();
+      setData(responseData);
+    } catch (err: any) {
+      setError(JSON.stringify(err));
+    } finally {
       setLoading(false);
-    });
+    }
   };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const fakeData = generateDummyPayment();
     try {
       setLoading(true);
+      setData("");
       await fetch("/api/payment", {
         method: "POST",
-        body: JSON.stringify({ ...fakeData })
+        body: JSON.stringify({ ...dummyData })
       }).then(res => res.json()).then(res => setPostData(res));
     } catch (err: any) {
       throw new Error(err);
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
   };
 
   return (
     <div className='flex flex-col gap-4 m-10'>
-      <h1 className='text-center text-bold text-violet-900'>TEST PAYMENT ENDPOINTS</h1>
+      <h1 className='text-center text-bold text-violet-900 font-bold'>TEST PAYMENT ENDPOINTS</h1>
+      <h2 className='text-center text-bold font-bold'>Request body</h2>
+      <JsonContainer formattedJSON={JSON.stringify(dummyData, null, 2)} />
       <form className='flex flex-col gap-4' onSubmit={handleSubmit}>
-        <button className="bg-gray-100 hover:bg-gray-300 border-2 border-gray-800 p-2" type="submit">POST PAYMENT WITH RANDOM DATA</button>
-        {postData ? <span>{JSON.stringify(postData)}</span> : null}
+        <ActionButton type="submit" method={methods.post} url={"/api/payment"} />
+        {postData ? <JsonContainer formattedJSON={JSON.stringify(postData, null, 2)} /> : null}
       </form>
       <div className='flex flex-col gap-4'>
-        <button className="bg-gray-100 hover:bg-gray-300 border-2 border-gray-800 p-2" onClick={handleGetData}>TEST GET PAYMENT ENDPOINT</button>
-        {data ? <span>{JSON.stringify(data)}</span> : null}
+        <ActionButton method={methods.get} url={"/api/payment"} onClick={handleGetData} />
+        {data ? <JsonContainer formattedJSON={JSON.stringify(data, null, 2)} /> : null}
       </div>
       {loading ? <span>Loading...</span> : null}
+      {error ? <JsonContainer formattedJSON={JSON.stringify(error, null, 2)} /> : null}
     </div>
   );
 }
