@@ -10,7 +10,7 @@ const JsonContainer: React.FC<Props> = ({ formattedJSON }) => {
 
   return (
     <div className="relative">
-      <button className="absolute right-3 top-3 bg-gray-100 hover:bg-gray-300 border-2 border-gray-800 p-1" onClick={(e) => {
+      <button className="absolute right-6 top-3 bg-gray-100 hover:bg-gray-300 border-2 border-gray-800 p-1" onClick={(e) => {
         e.preventDefault();
         copy(formattedJSON);
       }}>
