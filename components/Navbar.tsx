@@ -6,7 +6,7 @@ const links = [{ name: "packages", id: "/packages" }, { name: "signup", id: "/" 
 
 const Navbar = () => {
   return (
-    <div className='m-10 flex gap-2 items-center'>
+    <div className='flex gap-2 items-center'>
       <div className='w-40 h-20 flex mr-auto relative'>
         <Image priority src="/logo.svg" fill alt="logo" />
       </div>

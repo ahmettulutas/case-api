@@ -65,7 +65,7 @@ export default function Packages() {
   };
 
   return (
-    <div className='flex flex-col gap-8 m-10'>
+    <div className='flex flex-col gap-8'>
       <h1 className='text-center text-bold text-violet-900'>TEST PACKAGES ENDPOINTS</h1>
       {/* UNCOMMENT THE FORM BELOW TO ADD MORE PACKAGES  */}
       {/*       

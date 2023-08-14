@@ -48,7 +48,7 @@ export default function Packages() {
   };
 
   return (
-    <div className='flex flex-col gap-4 m-10'>
+    <div className='flex flex-col gap-4'>
       <h1 className='text-center text-bold text-violet-900 font-bold'>TEST PAYMENT ENDPOINTS</h1>
       <h2 className='text-center text-bold font-bold'>Request body</h2>
       <JsonContainer formattedJSON={JSON.stringify(dummyData, null, 2)} />
