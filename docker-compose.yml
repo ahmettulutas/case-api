@@ -1,0 +1,9 @@
+version: '3'
+services:
+  app:
+    image: docker-nextjs
+    build: .
+    ports:
+      - "3000:3000"
+    volumes: # WHEN THERE IS A CHANGE IN THE FILES, HOT RELOAD IS TRIGGERED BY FOLLOWING ALL FILES. 
+      - .:/app

@@ -13,12 +13,9 @@ export default function Packages() {
   const [packageId, setPackageId] = React.useState("");
   const [bulkData, setBulkData] = React.useState("");
   const [singleData, setSingleData] = React.useState("");
-  /*  const [dummyData, setDummyData] = React.useState<null | Record<string, any>>(null);
-  const [code, setCode] = React.useState(""); 
-    React.useEffect(() => {
-    const data = generateDummyPackageItem()
-    setDummyData(data)
-  },[])
+
+  // UNCOMMENT THE FORM BELOW TO ADD MORE PACKAGES
+  /* 
     const handlePost = async (e: React.FormEvent) => {
       e.preventDefault();
     
@@ -69,18 +66,14 @@ export default function Packages() {
 
   return (
     <div className='flex flex-col gap-8 m-10'>
-      <h1 className='text-center text-bold text-violet-900 font-bold'>TEST PACKAGES ENDPOINTS</h1>
-      {/*       <form onSubmit={handlePost} className='flex flex-col gap-4'>
-        <input
-          value={code}
-          name="password"
-          type="password"
-          className="border-2 border-gray-800 p-2"
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) => setCode(e.target.value)}
-          placeholder='password'
-        />
-        <ActionButton type="submit" method={methods.get} url={"/api/packages"} />
-      </form> */}
+      <h1 className='text-center text-bold text-violet-900'>TEST PACKAGES ENDPOINTS</h1>
+      {/* UNCOMMENT THE FORM BELOW TO ADD MORE PACKAGES  */}
+      {/*       
+      <form onSubmit={handlePost} className='flex flex-col gap-4'> 
+        <input name="password" type="password" className="border-2 border-gray-800 p-2" onChange={handleChange} placeholder='password' />
+        <button className="bg-gray-100 hover:bg-gray-300 border-2 border-gray-800 p-2" type="submit">POST PACKAGE WITH RANDOM DATA</button>
+      </form> 
+      */}
       <div className='flex flex-col gap-4'>
         <ActionButton method={methods.get} url={"/api/packages"} onClick={handleGetAllData} />
         {bulkData ? <JsonContainer formattedJSON={JSON.stringify(bulkData, null, 2)} /> : null}
