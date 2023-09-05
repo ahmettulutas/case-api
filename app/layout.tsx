@@ -19,7 +19,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${inter.className} mx-auto w-[96%] px-4 max-w-screen-2xl`}>
+      <body className={`${inter.className} mx-auto w-[96%] px-4 max-w-screen-2xl mt-4`}>
         <div className="flex flex-col gap-6">
           <Navbar />
           {children}

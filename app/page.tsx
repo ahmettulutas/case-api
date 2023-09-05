@@ -1,36 +1,23 @@
 "use client";
+import { HTTP_METHODS } from "next/dist/server/web/http";
 import React from "react";
 
 import ActionButton, { methods } from "@/components/ActionButton";
 import JsonContainer from "@/components/JsonContainer";
+import useFetchData from "@/hooks/useFetchData";
 
 export default function Home() {
   const initialFormState = { fullName: "", email: "" };
-
   const [form, setForm] = React.useState(initialFormState);
-  const [loading, setLoading] = React.useState(false);
-  const [data, setData] = React.useState();
-  const [error, setError] = React.useState("");
+  const { data, loading, error, trigger } = useFetchData();
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    trigger({ url: "/api/users", method: HTTP_METHODS[3], body: { ...form } });
+    setForm(initialFormState);
+  };
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setForm(prev => ({ ...prev, [name]: value }));
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setError("");
-    try {
-      setLoading(true);
-      await fetch("/api/users", {
-        method: "POST",
-        body: JSON.stringify({ ...form }),
-      }).then(res => res.json()).then(res => setData(res));
-
-    } catch (err: any) {
-      setError(JSON.stringify(err));
-    }
-    setLoading(false);
-    setForm(initialFormState);
   };
 
   return (

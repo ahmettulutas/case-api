@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 
+import { encodedData } from "@/constants/staticResponses";
 import Payment from "@/models/Payment";
 import connect from "@/utils/db";
 
@@ -16,9 +17,7 @@ export async function POST (request: NextRequest, response: NextResponse<any>) {
   }
 };
 export const GET = async (request: NextRequest, response: NextResponse<any>) => {
-  const encodedData = {
-  "content": "%3Cp%3E%C3%96deme%20s%C3%B6zle%C5%9Fmesi.%3C%2Fp%3E"
-};
+
   try {
     return  NextResponse.json({...encodedData}, {status: 201});
   } catch (err) {

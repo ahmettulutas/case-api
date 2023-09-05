@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import { HTTP_METHOD } from "next/dist/server/web/http";
+import { useState } from "react";
 
 const useFetchData = () => {
   const [data, setData] = useState(undefined);
@@ -8,20 +9,19 @@ const useFetchData = () => {
   const trigger = async ({
     url,
     body,
-    event
+    method
   }: {
     url: string;
     body?: any;
-    event: React.FormEvent | React.MouseEvent;
+    method: HTTP_METHOD;
   }) => {
-    event.preventDefault();
 
     try {
       setError("");
       setLoading(true);
 
       const options: RequestInit = {
-        method: body ? "POST" : "GET",
+        method,
         headers: {
           "Content-Type": "application/json"
         },

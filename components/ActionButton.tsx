@@ -1,7 +1,8 @@
+import { HTTP_METHOD } from "next/dist/server/web/http";
 import React from "react";
 type Props = React.ButtonHTMLAttributes<HTMLButtonElement> & {
   url: string;
-  method: typeof methods[keyof typeof methods]
+  method: HTTP_METHOD
 }
 export const methods = {
   post: "POST",
