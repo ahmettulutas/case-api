@@ -1,10 +1,25 @@
+"use client";
 import { HTTP_METHOD } from "next/dist/server/web/http";
 import { useState } from "react";
 
-const useFetchData = () => {
-  const [data, setData] = useState(undefined);
+import { useCookie } from "./useCookie";
+
+type FetchDataResponse<T> = {
+  data: T | undefined;
+  loading: boolean;
+  error: string | undefined;
+  trigger: (options: {
+    url: string;
+    body?: any;
+    method: HTTP_METHOD;
+  }) => Promise<void>;
+};
+
+const useFetchData = function<T>() {
+  const [data, setData] = useState<T | undefined>(undefined);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | undefined>(undefined);
+  const { getCookie } = useCookie("token");
 
   const trigger = async ({
     url,
@@ -15,23 +30,24 @@ const useFetchData = () => {
     body?: any;
     method: HTTP_METHOD;
   }) => {
-
     try {
+      const token = getCookie();
+      const headers = new Headers({
+        "Content-Type": "application/json",
+        ...(token ? { "Authorization": `Bearer ${token}` } : null)
+      });
       setError("");
       setLoading(true);
 
       const options: RequestInit = {
         method,
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: body ? JSON.stringify(body) : undefined
+        headers,
+        ...(body ? { body:JSON.stringify(body) } : null)
       };
-
       const response = await fetch(url, options);
       const responseData = await response.json();
-
       setData(responseData);
+
     } catch (err: any) {
       setError(err);
     } finally {
@@ -44,7 +60,7 @@ const useFetchData = () => {
     loading,
     error,
     trigger
-  };
+  } as FetchDataResponse<T>;
 };
 
 export default useFetchData;

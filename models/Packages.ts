@@ -4,14 +4,14 @@ const { Schema } = mongoose;
 
 const packageSchema = new Schema(
   {
-    imagePath: { type: String,required: true,},
-    name: {type: String,required: true,},
-    details: {type: Array,required: true},
-    tags: {type: Array,required: true},
-    amount: {type: Number,required: true},
-    currency: {type: String,required: true},
+    imagePath: { type: String,required: true, },
+    name: { type: String,required: true, },
+    details: { type: Array,required: true },
+    tags: { type: Array,required: true },
+    amount: { type: Number,required: true },
+    currency: { type: String,required: true },
     moreInformation: { type: String, required: true },
-    price: { type: Number, required: true}
+    price: { type: Number, required: true }
   },
   { timestamps: true }
 );

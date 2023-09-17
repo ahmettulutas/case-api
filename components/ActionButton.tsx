@@ -14,7 +14,7 @@ export const methods = {
 const ActionButton: React.FC<Props> = (props) => {
   const { url, method, ...rest } = props;
   return (
-    <button {...rest} className="font-bold bg-gray-100 hover:bg-gray-300 border-2 border-gray-800 p-2 flex items-center" type="submit">
+    <button {...rest} className="font-bold bg-gray-100 hover:bg-gray-300 border-2 border-gray-800 p-1 flex items-center" type="submit">
       <span className="border-2 border-gray-800 mr-4 p-1">{method}</span>
       <span>{url}</span>
     </button>

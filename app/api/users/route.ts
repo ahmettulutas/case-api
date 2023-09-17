@@ -1,24 +1,28 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 
-/* import User from "@/models/User";
-import connect from "@/utils/db"; */
+import User, { NewUserRequest } from "@/models/User";
+import connect from "@/utils/db";
 
-export const POST = async (request: NextRequest, response: NextResponse<any>) => {
-  const body = await request.json();
-    try {
-      /*     await connect();
-      await newUser.save(); */ /* COMMENTED OUT FOR NOW BECAUSE WE DONT NEED TO SAVE USER INFO TO MONGODB */
+export const POST = async (request: NewUserRequest) => {
+  const body = await request.json() as NewUserRequest;
 
-      if(!body?.fullName || !body?.email) {
-    return NextResponse.json({ message:"Bad Request. Missing required parameters." },{ status: 400 });    
-      }
-      else {
-
-        return NextResponse.json({ message:"Signup completed!" },{ status:201 });
-      }
+  if(!body?.email || !body?.code) {
+    return NextResponse.json({ message: "Bad Request! Missing required parameters." },{ status: 400 });    
   }
- catch (err: any) {
+
+  else {
+    try {
+      await connect();
+      const oldUser = await User.findOne({ email: body.email });
+      if (oldUser) return NextResponse.json({ message: "Error! This user already exists." } , { status: 422 });
+      const newUser = new User({ ...body });
+      newUser.save();
+      return NextResponse.json({ message:"Success! User has been saved.", code: body?.code } , { status:201 });
+    }
+    catch (err: any) {
       return NextResponse.json({ error: err }, { status: 500 });
     }
-  };
+  }
+};
+    
 
