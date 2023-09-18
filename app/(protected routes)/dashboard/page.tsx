@@ -16,7 +16,6 @@ export default function Home() {
   const [form, setForm] = React.useState(initialFormState);
   const { data: newUserData, loading: newUserLoading, error: newUserError, trigger: triggerAddNewUser } = useFetchData();
   const { data: newPackageResponse, loading: newPackageLoading, error: newPackageError, trigger: triggerAddNew } = useFetchData();
-  const [code, setCode] = React.useState("");
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     const { name, value, type, checked } = e.target;
@@ -36,7 +35,7 @@ export default function Home() {
   const handleAddNewPackage = async (e: React.FormEvent): Promise<void> => {
     e.preventDefault();
     const dummyData = generateDummyPackageItem();
-    triggerAddNew({ url: "/api/packages", method: HTTP_METHODS[3], body: { ...dummyData, code } });
+    triggerAddNew({ url: "/api/packages", method: HTTP_METHODS[3], body: { ...dummyData } });
   };
   const handleNewCode = () :void => {
     setForm(prev => ({ ...prev, code: generateUserCode() }));
@@ -76,7 +75,6 @@ export default function Home() {
       <section className="p-4 bg-gray-200">
         <form onSubmit={handleAddNewPackage} className='flex flex-col gap-4'>
           <h1 className='text-center font-bold'>ADD NEW PACKAGE</h1>
-          <input name="password" type="password" className="border-2 border-gray-800 p-2" onChange={(e) => setCode(e.target.value)} placeholder='password' />
           <ActionButton type="submit" method={methods.post} url={"/api/packages"} />
         </form>
         {newPackageLoading ? <span>Loading...</span> : null}

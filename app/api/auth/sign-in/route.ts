@@ -28,7 +28,6 @@ export const POST = async (request: NewUserRequest):Promise<NextResponse<UserRes
     const generatedToken = await generateToken({ id: user.id, email: user.email, code: user.code, role: user.role });
     const cookieStore = cookies();
     cookieStore.set("token", generatedToken);
-
     const response = NextResponse.json({ message: "Success! Signed in.", token: generatedToken, user }, { status: 201 });
     return response;
 
