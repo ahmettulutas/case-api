@@ -19,11 +19,17 @@ export const POST = async (request: NewUserRequest):Promise<NextResponse<UserRes
     if (!user || !checkStringsEqual(code, user.code)) {
       return NextResponse.json({ message: "Bad Request! Invalid credentials." }, { status: 401 });
     }
-    // Generate a jwt token.
+    // Check if the user's account has expired.
+    const expireDate = new Date(user.expireDate);
+    const currentDate = new Date();
+    if (expireDate < currentDate) return NextResponse.json({ message: "Oppss! Your account has expired." }, { status: 401 });
+    
+    // Generate and set the token to the cookie.
     const generatedToken = await generateToken({ id: user.id, email: user.email, code: user.code, role: user.role });
-    const response = NextResponse.json({ message: "Success! Signed in.", token: generatedToken, user }, { status: 201 });
     const cookieStore = cookies();
     cookieStore.set("token", generatedToken);
+
+    const response = NextResponse.json({ message: "Success! Signed in.", token: generatedToken, user }, { status: 201 });
     return response;
 
   } catch (err: any) {

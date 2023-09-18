@@ -62,22 +62,24 @@ export default function SignInForm() {
             Sign In
           </button>
         </form>
-        <section className="p-4 bg-gray-200">
-          {error ? <span>{error}</span> : null}
-          {data ? 
+
+        {error ? <span>{error}</span> : null}
+        {data ? 
+          <section className="p-4 bg-gray-200">
             <div className="flex flex-col gap-1">
               <span className="font-bold">Response:</span>
               <JsonContainer formattedJSON={JSON.stringify(data, null, 2)} />
             </div>
-            : null }
+          </section>
+          : null }
 
-          {data?.token ? 
-            <div className="flex flex-col gap-1">
-              <span className="font-bold">Bearer Token:</span>
-              <JsonContainer formattedJSON={JSON.stringify(data?.token, null, 2)} />
-            </div>
-            : null }
-        </section>
+        {data?.token ? 
+          <div className="flex flex-col gap-1">
+            <span className="font-bold">Bearer Token:</span>
+            <JsonContainer formattedJSON={data?.token} />
+          </div>
+          : null }
+     
       </div>
 
     </div>

@@ -5,7 +5,7 @@ import type { NextRequest } from "next/server";
 import { verifyToken } from "./helpers/jwtHelpers";
 
 const authRoutes = ["/api/auth/sign-in", "/auth/sign-in"];
-const adminRoutes = ["/dashboard"];
+const adminRoutes = ["/dashboard" ,"/api/users"];
 
 export async function middleware(request: NextRequest) {
 
@@ -16,17 +16,7 @@ export async function middleware(request: NextRequest) {
   const { value: tokenInCookie } = cookies.get("token") ?? { value: null };
   const verifyTokenInCookie = await verifyToken(tokenInCookie ?? "");
 
-  if(isAuthRoute) {
-    // If token exist in cookie check the role and redirect accordingly.
-    // if(verifyTokenInCookie) {
-    //   const { role } = verifyTokenInCookie;
-    //   if(role === "admin")  {
-    //     return NextResponse.redirect(new URL("/dashboard", url));
-    //   }
-    //   return NextResponse.redirect(new URL("/packages", url));
-    // }
-    return NextResponse.next();
-  }
+  if(isAuthRoute) return NextResponse.next();
 
   if(isExternalApiCall) {
     // Bearer token must be added for api calls..
@@ -39,8 +29,15 @@ export async function middleware(request: NextRequest) {
       const verifiedToken = await verifyToken(token);
 
       if(!token || !verifiedToken) return NextResponse.json({ message: "Error! Missing Bearer token." }, { status: 401 });
+      if(isAdminRoute) {
+        const { role } = verifiedToken;
+        if(!(role === "admin")) {
+          return NextResponse.json({ message: "Error! You are unauthorized" }, { status: 401 });
+        }
+      }
       return NextResponse.next();
     }
+
   }
   if(!verifyTokenInCookie) {
     return NextResponse.redirect(new URL("/unauthorized", url));
@@ -55,4 +52,4 @@ export async function middleware(request: NextRequest) {
 }
 
 
-export const config = { matcher: ["/api/auth/sign-in", "/api/packages", "/api/payment", "/api/users", "/packages" , "/dashboard", "/payment" , "/auth/sign-in"] };
+export const config = { matcher: ["/api/:path", "/packages" , "/dashboard", "/payment" , "/auth/sign-in"] };

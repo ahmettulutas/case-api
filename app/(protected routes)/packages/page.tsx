@@ -14,7 +14,7 @@ export default function Packages() {
   const { data: singleDataResponse, loading: singleDataLoading, error: singleDataError, trigger: triggerGetSingleData } = useFetchData();
 
   return (
-    <div className='flex flex-col gap-8'>
+    <div className='flex flex-col gap-4'>
       <section className="p-4 bg-gray-200">
         <h1 className='text-center font-bold'>TEST GET ALL PACKAGES</h1>
         <div className='flex flex-col gap-4'>

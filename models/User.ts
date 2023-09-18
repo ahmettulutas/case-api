@@ -27,8 +27,7 @@ const userSchema = new Schema<UserType>(
     },
     code: {
       type: String,
-      required: true,
-      unique: true
+      required: true
     },
     expireDate: {
       type: String,

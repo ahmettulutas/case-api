@@ -12,7 +12,7 @@ export default async function RootLayout ({ children }: Props ) {
 
   return (
     <main>
-      <section className="p-4 bg-gray-200 my-1">
+      <section className="p-4 bg-gray-200 my-2">
         <span className="font-bold">Note: Bearer token automatically added to the requests`s headers as authorization. Add it to authorization headers if you want to try api via postman or from other sources.</span>
         <br />
         <span className="font-bold">Token:</span>
