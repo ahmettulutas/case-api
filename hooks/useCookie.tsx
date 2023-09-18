@@ -8,7 +8,7 @@ type CookieFunctions =  {
 export function useCookie (cookieName: string): CookieFunctions {
   const getCookie = (): string => {
     const name = `${cookieName}=`;
-    if(window?.document) {
+    if(document) {
       const decodedCookie = decodeURIComponent(document?.cookie);
       const cookieArray = decodedCookie.split(";");
 
