@@ -1,14 +1,15 @@
 "use client";
 type CookieFunctions =  {
-  getCookie: () => string;
+  getCookie: () => string | null;
   setCookie: (value: string, expirationDays: number) => void;
   removeCookie: () => void;
 }
 
 export function useCookie (cookieName: string): CookieFunctions {
-  const getCookie = (): string => {
+  const getCookie = (): string | null => {
+    if(typeof document === "undefined") return null;
     const name = `${cookieName}=`;
-    if(document) {
+
       const decodedCookie = decodeURIComponent(document?.cookie);
       const cookieArray = decodedCookie.split(";");
 
@@ -18,7 +19,6 @@ export function useCookie (cookieName: string): CookieFunctions {
           return cookie.substring(name.length, cookie.length);
         }
       }
-    }
     return "";
   };
 
