@@ -17,7 +17,7 @@ export const POST = async (request: NewUserRequest) => {
       if (oldUser) return NextResponse.json({ message: "Error! This user already exists." } , { status: 422 });
       const newUser = await new User({ ...body });
       await newUser.save();
-      return NextResponse.json({ message:`Success! User has been saved. With the randomly generated code ${newUser.code} this user can use and test the apis untill ${newUser.expireDate}`, code: newUser.code } , { status:201 });
+      return NextResponse.json({ message:`Success! User has been saved. With the randomly generated code ${newUser.code} this user can use and test the apis untill ${newUser.expireDate}`, code: newUser.code, email: newUser.email } , { status:201 });
     }
     catch (err: any) {
       return NextResponse.json({ error: err }, { status: 500 });

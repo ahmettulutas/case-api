@@ -8,7 +8,6 @@ const authRoutes = ["/api/auth/sign-in", "/auth/sign-in"];
 const adminRoutes = ["/dashboard" ,"/api/users"];
 
 export async function middleware(request: NextRequest) {
-
   const { url, nextUrl, cookies } = request;
   const isAdminRoute = adminRoutes.includes(nextUrl.pathname);
   const isAuthRoute = authRoutes.includes(nextUrl.pathname);
@@ -39,6 +38,7 @@ export async function middleware(request: NextRequest) {
     }
 
   }
+
   if(!verifyTokenInCookie) {
     return NextResponse.redirect(new URL("/unauthorized", url));
   }
@@ -52,4 +52,4 @@ export async function middleware(request: NextRequest) {
 }
 
 
-export const config = { matcher: ["/api/:path", "/packages" , "/dashboard", "/payment" , "/auth/sign-in"] };
+export const config = { matcher: ["/api/payment", "/api/packages", "api/users", "/packages" , "/dashboard", "/payment" , "/auth/sign-in"] };
