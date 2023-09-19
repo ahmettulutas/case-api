@@ -4,7 +4,7 @@ import type { NextRequest } from "next/server";
 
 import { verifyToken } from "./helpers/jwtHelpers";
 
-const authRoutes = ["/api/auth/sign-in", "/auth/sign-in"];
+const authRoutes = ["/api/auth/sign-in", "/auth/sign-in", "/api/auth/sign-out"];
 const adminRoutes = ["/dashboard" ,"/api/users"];
 
 export async function middleware(request: NextRequest) {
