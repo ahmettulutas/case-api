@@ -51,5 +51,4 @@ export async function middleware(request: NextRequest) {
   }
 }
 
-
-export const config = { matcher: ["/api/payment", "/api/packages", "api/users", "/packages" , "/dashboard", "/payment" , "/auth/sign-in"] };
+export const config = { matcher: ["/api/:path*", "/packages" , "/dashboard", "/payment" , "/auth/sign-in"] };
