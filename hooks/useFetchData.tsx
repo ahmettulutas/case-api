@@ -17,7 +17,7 @@ type FetchDataResponse<T> = {
 
 const useFetchData = function<T>() {
   const [data, setData] = useState<T | undefined>(undefined);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | undefined>(undefined);
   const { getCookie } = useCookie("token");
 

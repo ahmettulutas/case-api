@@ -1,12 +1,10 @@
 
 import { cookies } from "next/headers";
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 
-export const GET = async (request: NextRequest):Promise<NextResponse> => {
+export const GET = async ():Promise<NextResponse> => {
   const cookieStore = cookies();
   try {
-    /* const { url } = request; 
-    const response = NextResponse.redirect(new URL("/auth/sign-in", url)); */
     cookieStore.delete("token");
     return NextResponse.json({ message: "Success! Signed out and token in the cookie has been cleared." }, { status: 200 });;
   } catch (err: any) {

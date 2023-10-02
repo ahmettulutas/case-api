@@ -19,7 +19,7 @@ export const POST = async (request: NewUserRequest) => {
       return NextResponse.json({ message:`Success! User has been saved. With the randomly generated code ${newUser.code} this user can use and test the apis until ${newUser.expireDate}`, code: newUser.code, email: newUser.email } , { status:201 });
     }
     catch (err: any) {
-      return NextResponse.json({ error: err }, { status: 500 });
+      return NextResponse.json({ message: "Error! An error occured.", error: err }, { status: 500 });
     }
   }
 };

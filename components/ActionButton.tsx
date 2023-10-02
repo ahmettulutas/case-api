@@ -4,7 +4,7 @@ type Props = React.ButtonHTMLAttributes<HTMLButtonElement> & {
   url: string;
   method: HTTP_METHOD
 }
-export const methods = {
+export const methods:Record<string, HTTP_METHOD> = {
   post: "POST",
   get: "GET",
   put: "PUT",

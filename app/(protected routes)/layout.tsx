@@ -7,16 +7,18 @@ type Props = {
 }
 
 export default async function RootLayout ({ children }: Props ) {
+
   const cookieStore = cookies();
   const token = cookieStore.get("token");
-
+  
+  if(!token) return (<h1>You are unauthorized.</h1>);
   return (
     <main>
       <section className="p-4 bg-gray-200 my-2">
-        <span className="font-bold">Note: Bearer token automatically added to the requests`s headers as authorization. Add it to authorization headers if you want to try api via postman or from other sources.</span>
-        <br />
         <span className="font-bold">Token:</span>
         {token?.value ? <JsonContainer formattedJSON={token.value} /> : null}
+        <span className="underline">Note: Bearer token automatically added to the requests`s headers as authorization. Add it to authorization headers if you want to try api via postman or from other sources.</span>
+        <br />
       </section>
       {children}
     </main>

@@ -13,11 +13,7 @@ export async function generateToken(payload: any) {
   return token;
 }
 export function getJwtSecretKey() {
-
-  if (!secret) {
-    throw new Error("JWT Secret key is not matched");
-  }
-
+  if (!secret) throw new Error("JWT Secret key is not matched");
   return new TextEncoder().encode(secret);
 }
 export async function verifyToken(token: string) {

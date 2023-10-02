@@ -4,7 +4,6 @@ import React from "react";
 
 import ActionButton, { methods } from "@/components/ActionButton";
 import JsonContainer from "@/components/JsonContainer";
-// import { generateDummyPackageItem } from "@/helpers/generateFakePackage";
 import useFetchData from "@/hooks/useFetchData";
 
 
@@ -14,10 +13,10 @@ export default function Packages() {
   const { data: singleDataResponse, loading: singleDataLoading, error: singleDataError, trigger: triggerGetSingleData } = useFetchData();
 
   return (
-    <div className='flex flex-col gap-4'>
+    <div className='flex flex-col gap-2'>
       <section className="p-4 bg-gray-200">
         <h1 className='text-center font-bold'>TEST GET ALL PACKAGES</h1>
-        <div className='flex flex-col gap-4'>
+        <div className='flex flex-col gap-2'>
           <ActionButton
             method={methods.get}
             url={"/api/packages"}
@@ -34,7 +33,7 @@ export default function Packages() {
       </section>
       <section className="p-4 bg-gray-200">
         <h1 className='text-center font-bold'>TEST GET PACKAGE BY ID</h1>
-        <form className='flex flex-col gap-4'
+        <form className='flex flex-col gap-2'
           onSubmit={(e: React.FormEvent) => {
             e.preventDefault();
             triggerGetSingleData({ url: `/api/packages/${packageId}`, method: HTTP_METHODS[0] });

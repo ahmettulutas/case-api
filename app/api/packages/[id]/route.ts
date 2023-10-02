@@ -10,6 +10,6 @@ export const GET = async (request: NextRequest, { params }: { params: { id: stri
     const post = await Packages.findById(id);
     return new NextResponse(JSON.stringify(post), { status: 200 });
   } catch (err) {
-    return NextResponse.json({ message: "Error! An error occured." }, { status: 401 });
+    return NextResponse.json({ message: "Error! An error occured." }, { status: 500 });
   }
 };

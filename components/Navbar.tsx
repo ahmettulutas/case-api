@@ -15,7 +15,7 @@ const Navbar = () => {
   const handleSignOut = async () => {
     await fetch("/api/auth/sign-out").then((res) => {
       if(res.status === 200) {
-        router.replace("/auth/sign-in");
+        router.refresh();
       }
     });
   };

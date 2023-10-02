@@ -11,7 +11,7 @@ export type UserResponse = { message: string, token?: string, user?: UserType, e
 export const POST = async (request: NewUserRequest):Promise<NextResponse<UserResponse>>=> {
   const body = await request.json();
   const { email, code } = body;
-  if(!email || !code) return NextResponse.json({ message: "Bad Request! Missing required parameters. Please make sure to add email and code parameters to the body." }, { status: 400 });
+  if(!email || !code) return NextResponse.json({ message: "Bad Request! Please add email and/or code parameters to the body." }, { status: 400 });
 
   try {
     await connect();
@@ -22,7 +22,7 @@ export const POST = async (request: NewUserRequest):Promise<NextResponse<UserRes
     // Check if the user's account has expired.
     const expireDate = new Date(user.expireDate);
     const currentDate = new Date();
-    if (expireDate < currentDate) return NextResponse.json({ message: "Oppss! Your account has expired." }, { status: 401 });
+    if (expireDate < currentDate) return NextResponse.json({ message: "Oppss! Your account has been expired." }, { status: 401 });
     
     // Generate and set the token to the cookie.
     const generatedToken = await generateToken({ id: user.id, email: user.email, code: user.code, role: user.role });
