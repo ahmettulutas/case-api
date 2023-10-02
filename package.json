@@ -2,23 +2,30 @@
   "name": "param-case-api",
   "version": "0.1.0",
   "private": true,
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": "eslint --fix"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "type-check": "tsc --noEmit",
+    "lint-staged": "lint-staged",
+    "postinstall": "husky install"
   },
   "dependencies": {
     "@faker-js/faker": "^8.0.2",
-    "@types/node": "20.4.7",
     "@types/react": "18.2.18",
     "@types/react-dom": "18.2.7",
     "autoprefixer": "10.4.14",
+    "axios": "^1.5.0",
     "dotenv": "^16.3.1",
     "eslint": "^7.32.0",
-    "eslint-config-next": "13.4.12",
+    "eslint-config-next": "^13.5.1",
+    "jose": "^4.14.6",
     "mongoose": "^7.4.2",
-    "next": "13.4.12",
+    "next": "^13.4.12",
     "postcss": "8.4.27",
     "react": "18.2.0",
     "react-dom": "18.2.0",
@@ -27,11 +34,15 @@
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.22.9",
+    "@types/react": "^18.2.15",
+    "@types/react-dom": "^18.2.7",
     "@typescript-eslint/eslint-plugin": "^6.2.1",
     "@typescript-eslint/parser": "^6.2.1",
     "eslint-import-resolver-typescript": "^3.5.5",
     "eslint-plugin-import": "^2.28.0",
     "eslint-plugin-react": "^7.33.1",
-    "eslint-plugin-react-hooks": "^5.0.0-canary-7118f5dd7-20230705"
+    "eslint-plugin-react-hooks": "^5.0.0-canary-7118f5dd7-20230705",
+    "husky": "^8.0.3",
+    "lint-staged": "^13.2.3"
   }
 }

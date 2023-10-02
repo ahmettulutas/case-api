@@ -1,0 +1,6 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+echo -e "\n${yellow}Executing pre-push hook...${no_color}\n"
+
+npm run type-check && npm run lint-staged

@@ -1,26 +1,31 @@
-
 import "./globals.css";
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Roboto_Mono } from "next/font/google";
 
 import Navbar from "@/components/Navbar";
-const inter = Inter({ subsets: ["latin"] });
+
+const roboto = Roboto_Mono({
+  weight: "400",
+  subsets: ["latin"],
+});
 
 export const metadata: Metadata = {
   title: "Paramtech FE Case",
   description: "Paramtech FE Case Documentation",
 };
 
-export default function RootLayout({
-  children,
-}: {
+type Props = {
   children: React.ReactNode
-}) {
+}
+
+export default async function RootLayout ({ children }: Props ) {
   return (
     <html lang="en">
-      <body className={inter.className}>
-        <Navbar />
-        {children}
+      <body className={`${roboto.className} mx-auto w-[96%] px-4 max-w-screen-2xl mt-4`}>
+        <div className="flex flex-col gap-6">
+          <Navbar />
+          {children}
+        </div>
       </body>
     </html>
   );

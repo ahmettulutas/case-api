@@ -86,7 +86,10 @@ module.exports = {
     "react/react-in-jsx-scope": "off",
     "react/self-closing-comp": "warn",
     "quotes": ["error", "double"],
-     "semi": ["error", "always"]
+    "semi": ["error", "always"],
+    "space-before-blocks": ["error", "always"],
+    "object-curly-spacing": ["error", "always"],
+    "indent": ["error", 2],
   },
   overrides: [
     {
