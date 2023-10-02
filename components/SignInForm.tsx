@@ -10,7 +10,7 @@ import JsonContainer from "./JsonContainer";
 export default function SignInForm() {
   const initialFormState = { email: "", code: "" };
   const [userInfo, setUserInfo] = React.useState(initialFormState);
-  const { data, error, trigger } = useFetchData<UserResponse>();
+  const { data, loading, error, trigger } = useFetchData<UserResponse>();
 
   const handleChange: ChangeEventHandler<HTMLInputElement> = (e:React.ChangeEvent<HTMLInputElement>) => {
     const { value, name } = e.target;
@@ -23,7 +23,7 @@ export default function SignInForm() {
   };
 
   return (
-    <div className="flex justify-center items-center">
+    <div className="flex flex-col justify-center items-center gap-4">
       <div className="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 border border-gray-800 p-4 relative">
         <h2 className="text-2xl font-semibold mb-2">Sign In</h2>
         <form onSubmit={handleSubmit} className="my-2">
@@ -62,7 +62,9 @@ export default function SignInForm() {
             Sign In
           </button>
         </form>
-
+      </div>
+      <div className="w-2/5">
+        {loading ? <span>Loading...</span> : null}
         {error ? <span>{error}</span> : null}
         {data ? 
           <section className="p-4 bg-gray-200">
@@ -70,18 +72,15 @@ export default function SignInForm() {
               <span className="font-bold">Response:</span>
               <JsonContainer formattedJSON={JSON.stringify(data, null, 2)} />
             </div>
+        
+            <div className="flex flex-col gap-1">
+              <span className="font-bold">Bearer Token:</span>
+              {data?.token && <JsonContainer formattedJSON={data?.token} />}
+            </div>
           </section>
-          : null }
-
-        {data?.token ? 
-          <div className="flex flex-col gap-1">
-            <span className="font-bold">Bearer Token:</span>
-            <JsonContainer formattedJSON={data?.token} />
-          </div>
-          : null }
-     
+          : null
+        }
       </div>
-
     </div>
   );
 }

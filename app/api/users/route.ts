@@ -5,7 +5,6 @@ import connect from "@/utils/db";
 
 export const POST = async (request: NewUserRequest) => {
   const body = await request.json() as NewUserRequest;
-
   if(!body?.email) {
     return NextResponse.json({ message: "Bad Request! Missing required parameters." },{ status: 400 });    
   }

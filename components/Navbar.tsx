@@ -9,7 +9,7 @@ const links = [ { name: "dashboard", id: "/dashboard" }, { name: "packages", id:
 
 const Navbar = () => {
   const { getCookie } = useCookie("token");
-  const [token, setToken] = React.useState(getCookie());
+  const [token, setToken] = React.useState<null | string>("");
 
   const router = useRouter();
   const handleSignOut = async () => {
@@ -22,7 +22,7 @@ const Navbar = () => {
   React.useEffect(() => {
     const newToken = getCookie();
     setToken(newToken);
-  }, [getCookie]);
+  }, [getCookie, token]);
 
   return (
     <nav className='grid grid-cols-2 gap-2 items-center w-full'>
@@ -35,11 +35,12 @@ const Navbar = () => {
             <Link className="border-2 border-gray-800 p-2 block" href={item.id}>{item.name}</Link>
           </li>
         ))}
-        <li>
-          {token && 
-          <button className="border-2 border-gray-800 p-2 block" onClick={handleSignOut}>sign out</button> 
-          }
-        </li>
+        {token ? 
+          <li>
+            <button className="border-2 border-gray-800 p-2 block" onClick={handleSignOut}>sign out</button> 
+          </li>
+          : null
+        }
       </ul>
     </nav>
   );
