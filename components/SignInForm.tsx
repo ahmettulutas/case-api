@@ -8,9 +8,9 @@ import useFetchData from "@/hooks/useFetchData";
 
 import JsonContainer from "./JsonContainer";
 
-export default function SignInForm() {
-  const initialFormState = { email: "", code: "" };
-  const [userInfo, setUserInfo] = React.useState(initialFormState);
+export default function SignInForm () {
+  const initialFormState = { email: "", code: "" } as const;
+  const [userInfo, setUserInfo] = React.useState<typeof initialFormState>(initialFormState);
   const { data, loading, error, trigger } = useFetchData<UserResponse>();
   const router = useRouter();
 
@@ -26,11 +26,11 @@ export default function SignInForm() {
   };
 
   return (
-    <div className="flex flex-col justify-center items-center gap-4">
+    <div className="flex flex-col justify-center items-center">
       <div className="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 border border-gray-800 p-4 relative">
         <h2 className="text-2xl font-semibold mb-2">Sign In</h2>
-        <form onSubmit={handleSubmit} className="my-2">
-          <div className="mb-2">
+        <form onSubmit={handleSubmit} className="my-2 flex flex-col gap-2">
+          <div>
             <label className="block text-gray-800 mb-2" htmlFor="email">
               Email
             </label>
@@ -44,8 +44,8 @@ export default function SignInForm() {
               placeholder="Enter your email"
             />
           </div>
-          <div className="mb-2">
-            <label className="block text-gray-800 mb-2" htmlFor="password">
+          <div>
+            <label className="block text-gray-800 mb-2" htmlFor="code">
               Code
             </label>
             <input
@@ -74,7 +74,6 @@ export default function SignInForm() {
               <span className="font-bold">Response:</span>
               <JsonContainer formattedJSON={JSON.stringify(data, null, 2)} />
             </div>
-        
             <div className="flex flex-col gap-1">
               <span className="font-bold">Bearer Token:</span>
               {data?.token && <JsonContainer formattedJSON={data?.token} />}

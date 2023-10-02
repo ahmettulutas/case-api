@@ -36,11 +36,11 @@ const AddNewUser = () => {
   return (
     <form className='flex flex-col gap-2' onSubmit={handleAddNewUser}>
       <h1 className='text-center font-bold'>ADD NEW USER</h1>
-      <div className="flex gap-1 flex-col">
-        <label htmlFor="email">Email</label>
+      <div>
+        <label className="block" htmlFor="email">Email</label>
         <input id="email" value={form.email} className="border-2 border-gray-800 p-2" name="email" onChange={handleChange} type="text" placeholder='email' />
       </div>
-      <div className="flex gap-1 flex-col">
+      <div>
         <label htmlFor="code">Random user code</label>
         <div className="flex gap-2">
           <input disabled id="code" value={form.code} className="border-2 border-gray-800 p-1" name="code" onChange={handleChange} type="text" placeholder='code' />
@@ -51,8 +51,8 @@ const AddNewUser = () => {
         <label htmlFor="role-checkbox">isAdmin?</label>
         <input id="role-checkbox" type="checkbox" name="role" checked={form.role === "admin"} onChange={handleChange} className="h-4 w-4 bg-gray-100 border-gray-500 rounded focus:ring-2 cursor-pointer" />
       </div>
-      <div className="flex gap-1 flex-col">
-        <label htmlFor="expireDate">Expire Date</label>
+      <div>
+        <label className="block" htmlFor="expireDate">Expire Date</label>
         <input id="expireDate" value={form.expireDate} className="border-2 border-gray-800 p-2" name="expireDate" onChange={handleChange} type="date" placeholder='expireDate' />
       </div>
       <ActionButton type="submit" method={methods.post} url={"/api/users"} />

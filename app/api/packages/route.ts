@@ -10,7 +10,6 @@ export async function POST (request: NextRequest) {
   const { value: tokenInCookie } = cookies.get("token") ?? { value: null };
   const verifyTokenInCookie = await verifyToken(tokenInCookie ?? "");
   if(!verifyTokenInCookie || verifyTokenInCookie?.role !== "admin") return NextResponse.json({ message: "Unauthorized! You are unauthorized!" }, { status: 401 });
-  
   try {
     const newPackage = new Packages(body);
     await connect();

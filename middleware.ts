@@ -16,6 +16,7 @@ export async function middleware(request: NextRequest) {
   const verifyTokenInCookie = await verifyToken(tokenInCookie ?? "");
 
   if(isAuthRoute) {
+    // routes that don't require token in the headers or cookie.
     cookies.delete("token");
     const requestHeaders = new Headers(request.headers);
     requestHeaders.set("Authorization", "");

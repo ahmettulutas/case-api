@@ -6,7 +6,7 @@ import MakePayment from "@/components/MakePayment";
 export default async function Packages() {
   return (
     <div className='flex flex-col gap-2'>
-      <section className="p-4 bg-gray-200" suppressHydrationWarning>
+      <section className="p-4 bg-gray-200">
         <h1 className='text-center font-bold'>TEST PAYMENT POST</h1>
         <MakePayment />
       </section>

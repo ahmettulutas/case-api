@@ -1,11 +1,9 @@
 "use client";
-import { HTTP_METHODS } from "next/dist/server/web/http";
 import React from "react";
 
 import ActionButton, { methods } from "@/components/ActionButton";
 import JsonContainer from "@/components/JsonContainer";
 import useFetchData from "@/hooks/useFetchData";
-
 
 export default function Packages() {
   const [packageId, setPackageId] = React.useState("");
@@ -20,7 +18,7 @@ export default function Packages() {
           <ActionButton
             method={methods.get}
             url={"/api/packages"}
-            onClick={() => triggerGetAllData({ url: "/api/packages", method: HTTP_METHODS[0] })} />
+            onClick={() => triggerGetAllData({ url: "/api/packages", method: methods.get })} />
           {bulkDataLoading ? <span>Loading...</span> : null}
           {bulkDataError ? <JsonContainer formattedJSON={JSON.stringify(bulkDataError, null, 2)} /> : null}
           {bulkDataResponse ? 
@@ -32,20 +30,25 @@ export default function Packages() {
         </div>
       </section>
       <section className="p-4 bg-gray-200">
-        <h1 className='text-center font-bold'>TEST GET PACKAGE BY ID</h1>
-        <form className='flex flex-col gap-2'
+        <h1 className="text-center font-bold">TEST GET PACKAGE BY ID</h1>
+        <form className="flex flex-col gap-2"
           onSubmit={(e: React.FormEvent) => {
             e.preventDefault();
-            triggerGetSingleData({ url: `/api/packages/${packageId}`, method: HTTP_METHODS[0] });
+            triggerGetSingleData({ url: `/api/packages/${packageId}`, method: methods.get });
           }}>
-          <input
-            value={packageId}
-            name="packageId"
-            type="text"
-            className="border-2 border-gray-800 p-2"
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPackageId(e.target.value)}
-            placeholder='Enter Package Id'
-          />
+          <div>
+
+            <label className="block" htmlFor="packageId">Package Id</label>
+            <input
+              id="packageId"
+              value={packageId}
+              name="packageId"
+              type="text"
+              className="border-2 border-gray-800 p-2"
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPackageId(e.target.value)}
+              placeholder='Enter Package Id'
+            />
+          </div>
           <ActionButton
             method={methods.get}
             type="submit"
