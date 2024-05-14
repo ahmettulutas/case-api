@@ -15,7 +15,7 @@ type FetchDataResponse<T> = {
   }) => Promise<void>;
 };
 
-const useFetchData = function<T>() {
+const useFetchData = function <T>() {
   const [data, setData] = useState<T | undefined>(undefined);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | undefined>(undefined);
@@ -24,7 +24,7 @@ const useFetchData = function<T>() {
   const trigger = async ({
     url,
     body,
-    method
+    method,
   }: {
     url: string;
     body?: any;
@@ -34,7 +34,7 @@ const useFetchData = function<T>() {
       const token = getCookie();
       const headers = new Headers({
         "Content-Type": "application/json",
-        ...(token ? { "Authorization": `Bearer ${token}` } : null)
+        ...(token ? { Authorization: `Bearer ${token}` } : null),
       });
       setError("");
       setLoading(true);
@@ -42,12 +42,11 @@ const useFetchData = function<T>() {
       const options: RequestInit = {
         method,
         headers,
-        ...(body ? { body:JSON.stringify(body) } : null)
+        ...(body ? { body: JSON.stringify(body) } : null),
       };
       const response = await fetch(url, options);
       const responseData = await response.json();
       setData(responseData);
-
     } catch (err: any) {
       setError(err);
     } finally {
@@ -59,7 +58,7 @@ const useFetchData = function<T>() {
     data,
     loading,
     error,
-    trigger
+    trigger,
   } as FetchDataResponse<T>;
 };
 

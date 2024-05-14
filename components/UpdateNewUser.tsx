@@ -1,7 +1,6 @@
 "use client";
 import React from "react";
 
-import { generateUserCode } from "@/helpers/generateUserCode";
 import useFetchData from "@/hooks/useFetchData";
 import { UserType } from "@/models/User";
 
@@ -17,7 +16,7 @@ const initialFormState: Pick<
   "role" | "email" | "code" | "expireDate"
 > = { email: "", code: "", expireDate: threeDaysLater, role: "user" };
 
-const AddNewUser = () => {
+const UpdateUser = () => {
   const [form, setForm] = React.useState(initialFormState);
   const {
     data: newUserData,
@@ -35,17 +34,13 @@ const AddNewUser = () => {
   };
   const handleAddNewUser = async (e: React.FormEvent): Promise<void> => {
     e.preventDefault();
-    triggerAddNewUser({ url: "/api/users", method: methods.post, body: form });
+    triggerAddNewUser({ url: "/api/users", method: methods.put, body: form });
     setForm(initialFormState);
-  };
-  const handleNewCode = (): void => {
-    const newCode = generateUserCode();
-    setForm((prev) => ({ ...prev, code: newCode }));
   };
 
   return (
     <form className="flex flex-col gap-2" onSubmit={handleAddNewUser}>
-      <h1 className="text-center font-bold">ADD NEW USER</h1>
+      <h1 className="text-center font-bold">UPDATE EXISTING USER</h1>
       <div>
         <label className="block" htmlFor="email">
           Email
@@ -64,7 +59,6 @@ const AddNewUser = () => {
         <label htmlFor="code">Random user code</label>
         <div className="flex gap-2">
           <input
-            disabled
             id="code"
             value={form.code}
             className="border-2 border-gray-800 p-1"
@@ -73,13 +67,6 @@ const AddNewUser = () => {
             type="text"
             placeholder="code"
           />
-          <button
-            type="button"
-            onClick={handleNewCode}
-            className="font-bold bg-gray-100 hover:bg-gray-300 border-2 border-gray-800 p-2 flex items-center"
-          >
-            NEW CODE
-          </button>
         </div>
       </div>
       <div className="flex gap-1 items-center">
@@ -107,7 +94,12 @@ const AddNewUser = () => {
           placeholder="expireDate"
         />
       </div>
-      <ActionButton type="submit" method={methods.post} url={"/api/users"} />
+      <ActionButton
+        type="submit"
+        method={methods.put}
+        url={"/api/users"}
+        disabled={!form.email}
+      />
       {newUserLoading ? <span>Loading...</span> : null}
       {newUserData ? (
         <JsonContainer formattedJSON={JSON.stringify(newUserData, null, 2)} />
@@ -119,4 +111,4 @@ const AddNewUser = () => {
   );
 };
 
-export default AddNewUser;
+export default UpdateUser;

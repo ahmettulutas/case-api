@@ -1,4 +1,3 @@
-
 ## What does this project do?
 
 This project has been created to allow our candidates to check how the api works for the case we provide them.
@@ -30,16 +29,16 @@ pnpm dev
 
 // // More on how NextAuth.js middleware works: https://next-auth.js.org/configuration/nextjs#middleware
 // export default withAuth({
-//   callbacks: {
-//     authorized({ req, token }) {
-//       // `/admin` requires admin role
-//       if (req.nextUrl.pathname === "/dashboard") {
-//         return token?.userRole === "admin";
-//       }
-//       // `/me` only requires the user to be logged in
-//       return !!token;
-//     },
-//   },
+// callbacks: {
+// authorized({ req, token }) {
+// // `/admin` requires admin role
+// if (req.nextUrl.pathname === "/dashboard") {
+// return token?.userRole === "admin";
+// }
+// // `/me` only requires the user to be logged in
+// return !!token;
+// },
+// },
 // });
 
 // export const config = { matcher: ["/dashboard"] };

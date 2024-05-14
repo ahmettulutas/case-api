@@ -8,25 +8,34 @@ import useFetchData from "@/hooks/useFetchData";
 
 import JsonContainer from "./JsonContainer";
 
-export default function SignInForm () {
+export default function SignInForm() {
   const initialFormState = { email: "", code: "" } as const;
-  const [userInfo, setUserInfo] = React.useState<typeof initialFormState>(initialFormState);
+  const [userInfo, setUserInfo] =
+    React.useState<typeof initialFormState>(initialFormState);
   const { data, loading, error, trigger } = useFetchData<UserResponse>();
   const router = useRouter();
 
-  const handleChange: ChangeEventHandler<HTMLInputElement> = (e:React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange: ChangeEventHandler<HTMLInputElement> = (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
     const { value, name } = e.target;
-    setUserInfo(prev  => ({ ...prev, [name]: value }));
+    setUserInfo((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit: FormEventHandler<HTMLFormElement> = async (e:React.FormEvent) => {
+  const handleSubmit: FormEventHandler<HTMLFormElement> = async (
+    e: React.FormEvent
+  ) => {
     e.preventDefault();
-    await trigger({ url: "/api/auth/sign-in", body: userInfo, method: HTTP_METHODS[3] });
+    await trigger({
+      url: "/api/auth/sign-in",
+      body: userInfo,
+      method: HTTP_METHODS[3],
+    });
     router.refresh();
   };
 
   return (
-    <div className="flex flex-col justify-center items-center">
+    <div className="flex flex-col justify-center items-center pt-10">
       <div className="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 border border-gray-800 p-4 relative">
         <h2 className="text-2xl font-semibold mb-2">Sign In</h2>
         <form onSubmit={handleSubmit} className="my-2 flex flex-col gap-2">
@@ -59,16 +68,18 @@ export default function SignInForm () {
             />
           </div>
           <button
-            className={`font-bold bg-gray-100 hover:bg-gray-300 border-2 border-gray-800 p-2 flex items-center ${loading ? "animate-pulse" : ""}`}
+            className={`font-bold bg-gray-100 hover:bg-gray-300 border-2 border-gray-800 p-2 flex items-center ${
+              loading ? "animate-pulse" : ""
+            }`}
             type="submit"
           >
             Sign In
           </button>
         </form>
       </div>
-      <div className="w-2/5">
+      <div className="w-full md:w-1/2 lg:w-2/5">
         {error ? <span>{error}</span> : null}
-        {data ? 
+        {data ? (
           <section className="p-4 bg-gray-200">
             <div className="flex flex-col gap-1">
               <span className="font-bold">Response:</span>
@@ -79,8 +90,7 @@ export default function SignInForm () {
               {data?.token && <JsonContainer formattedJSON={data?.token} />}
             </div>
           </section>
-          : null
-        }
+        ) : null}
       </div>
     </div>
   );

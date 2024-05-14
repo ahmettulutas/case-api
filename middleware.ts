@@ -7,40 +7,42 @@ const authRoutes = ["/api/auth/sign-in", "/auth/sign-in", "/api/auth/sign-out"];
 const adminRoutes = ["/dashboard", "/api/users"];
 
 export async function middleware(request: NextRequest, res: NextResponse) {
-  const { url, nextUrl, cookies } = request;
+  const { url, nextUrl, cookies /* headers */ } = request;
+  // const origin = headers.get("origin");
+  const requestHeaders = new Headers(request.headers);
+  if (request.method === "OPTIONS") {
+    requestHeaders.set("Access-Control-Allow-Credentials", "true");
+    requestHeaders.set("Access-Control-Allow-Origin", "*");
+    requestHeaders.set(
+      "Access-Control-Allow-Methods",
+      "GET,PATCH,DELETE,POST,PUT, OPTIONS"
+    );
+    requestHeaders.set(
+      "Access-Control-Allow-Headers",
+      "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version, Authorization"
+    );
+    return NextResponse.next({ request: { headers: requestHeaders } });
+  }
+
   const isAdminRoute = adminRoutes.includes(nextUrl.pathname);
   const isAuthRoute = authRoutes.includes(nextUrl.pathname);
   const isApiCall = request.nextUrl.pathname.startsWith("/api");
   const { value: tokenInCookie } = cookies.get("token") ?? { value: null };
   const verifyTokenInCookie = await verifyToken(tokenInCookie ?? "");
 
-  if (request.method === "OPTIONS") {
-    return NextResponse.next();
-  }
-
   if (isAuthRoute) {
-    // routes that don't require token in the headers or cookie.
-
     cookies.delete("token");
-    const requestHeaders = new Headers(request.headers);
     requestHeaders.set("Authorization", "");
     return NextResponse.next({
-      request: {
-        headers: requestHeaders,
-      },
+      request: { headers: requestHeaders },
     });
   }
 
   if (isApiCall) {
     // Bearer token must be added for api calls..
-    const requestHeaders = new Headers(request.headers);
     const authorizationHeader =
       requestHeaders.get("authorization") ||
       requestHeaders.get("Authorization");
-
-    if (request.method === "OPTIONS") {
-      return NextResponse.next();
-    }
     if (!authorizationHeader)
       return NextResponse.json(
         { message: "Unauthorized! Missing Authorization header." },
@@ -69,6 +71,12 @@ export async function middleware(request: NextRequest, res: NextResponse) {
   }
 
   if (!verifyTokenInCookie) {
+    if (isApiCall) {
+      return NextResponse.json(
+        { message: "Unauthorized! You are unauthorized" },
+        { status: 403 }
+      );
+    }
     return NextResponse.redirect(new URL("/unauthorized", url));
   }
   if (isAdminRoute) {

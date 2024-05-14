@@ -5,7 +5,8 @@ import { SignJWT, jwtVerify } from "jose";
 const secret = process.env.JWT_SECRET as string;
 export async function generateToken(payload: any) {
   const token = await new SignJWT({
-    ...payload })
+    ...payload,
+  })
     .setProtectedHeader({ alg: "HS256" })
     .setIssuedAt()
     .setExpirationTime("1h") // Set your own expiration time
@@ -18,7 +19,7 @@ export function getJwtSecretKey() {
 }
 export async function verifyToken(token: string) {
   try {
-    const { payload } =  await jwtVerify(token, getJwtSecretKey());
+    const { payload } = await jwtVerify(token, getJwtSecretKey());
     return payload;
   } catch (error: any) {
     return null; // Token is invalid or expired

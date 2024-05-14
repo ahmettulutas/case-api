@@ -1,15 +1,18 @@
 "use client";
 import { useState } from "react";
 
-type CopiedValue = string | null
-type CopyFn = (text: string) => Promise<boolean> // Return success
+type CopiedValue = string | null;
+type CopyFn = (text: string) => Promise<boolean>; // Return success
 
-export function useCopyToClipboard(): { isCopied: boolean, copiedText: CopiedValue, copy: CopyFn } {
-
+export const useCopyToClipboard = (): {
+  isCopied: boolean;
+  copiedText: CopiedValue;
+  copy: CopyFn;
+} => {
   const [copiedText, setCopiedText] = useState<CopiedValue>(null);
   const [isCopied, setIsCopied] = useState(false);
 
-  const copy: CopyFn = async text => {
+  const copy: CopyFn = async (text) => {
     if (!navigator?.clipboard) {
       return false;
     }
@@ -27,4 +30,4 @@ export function useCopyToClipboard(): { isCopied: boolean, copiedText: CopiedVal
   };
 
   return { isCopied, copiedText, copy };
-}
+};

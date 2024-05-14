@@ -15,13 +15,16 @@ export const metadata: Metadata = {
 };
 
 type Props = {
-  children: React.ReactNode
-}
+  children: React.ReactNode;
+};
 
-export default async function RootLayout ({ children }: Props ) {
+export default async function RootLayout({ children }: Props) {
   return (
     <html lang="en">
-      <body className={`${roboto.className} mx-auto w-[96%] px-4 max-w-screen-2xl mt-4`}>
+      <link rel="icon" href="/favicon.png" sizes="any" />
+      <body
+        className={`${roboto.className} mx-auto w-[96%] px-4 max-w-screen-2xl mt-4`}
+      >
         <div className="flex flex-col gap-6">
           <Navbar />
           {children}

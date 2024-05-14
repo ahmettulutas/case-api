@@ -4,18 +4,26 @@ import { NextRequest } from "next/server";
 export type UserRoles = "admin" | "user";
 export type NewUserRequest = NextRequest & {
   json(): NewUserRequest | PromiseLike<NewUserRequest>;
-  email:string;
-  code:string;
-}
+  email: string;
+  code: string;
+};
+
+export type UpdateUserRequest = NextRequest & {
+  expireDate: string;
+  json(): NewUserRequest | PromiseLike<NewUserRequest>;
+  email: string;
+  code: string;
+};
+
 export type UserType = {
-  email:string;
-  code:string;
+  email: string;
+  code: string;
   _id: string;
   createdAt: string;
   updatedAt: string;
   expireDate: string;
-  role: UserRoles
-}
+  role: UserRoles;
+};
 
 const { Schema } = mongoose;
 const userSchema = new Schema<UserType>(
@@ -23,17 +31,17 @@ const userSchema = new Schema<UserType>(
     email: {
       type: String,
       required: true,
-      unique: true
+      unique: true,
     },
     code: {
       type: String,
-      required: true
+      required: true,
     },
     expireDate: {
       type: String,
-      required: true
+      required: true,
     },
-    role: { type: String, enum: ["admin", "user"], default: "user" }
+    role: { type: String, enum: ["admin", "user"], default: "user" },
   },
   { timestamps: true }
 );

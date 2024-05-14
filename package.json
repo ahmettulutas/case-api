@@ -12,7 +12,8 @@
     "lint": "next lint",
     "type-check": "tsc --noEmit",
     "lint-staged": "lint-staged",
-    "postinstall": "husky install"
+    "postinstall": "husky install",
+    "format": "prettier --write ."
   },
   "dependencies": {
     "@faker-js/faker": "^8.0.2",
@@ -43,6 +44,7 @@
     "eslint-plugin-react": "^7.33.1",
     "eslint-plugin-react-hooks": "^5.0.0-canary-7118f5dd7-20230705",
     "husky": "^8.0.3",
-    "lint-staged": "^13.2.3"
+    "lint-staged": "^13.2.3",
+    "prettier": "^3.1.0"
   }
 }

@@ -1,13 +1,13 @@
 "use client";
-type CookieFunctions =  {
+type CookieFunctions = {
   getCookie: () => string | null;
   setCookie: (value: string, expirationDays: number) => void;
   removeCookie: () => void;
-}
+};
 
-export function useCookie (cookieName: string): CookieFunctions {
+export function useCookie(cookieName: string): CookieFunctions {
   const getCookie = (): string | null => {
-    if(typeof document === "undefined") return null;
+    if (typeof document === "undefined") return null;
     const name = `${cookieName}=`;
 
     const decodedCookie = decodeURIComponent(document?.cookie);
@@ -34,4 +34,4 @@ export function useCookie (cookieName: string): CookieFunctions {
   };
 
   return { getCookie, setCookie, removeCookie };
-};
+}
