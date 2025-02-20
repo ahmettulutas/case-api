@@ -1,10 +1,32 @@
-## What does this project do?
+📖 What Does This Project Do?
+This project has been designed to help candidates explore, test, and understand how the provided API works for the e-commerce case study we assign.
 
-This project has been created to allow our candidates to check how the api works for the case we provide them.
+⚡ Key Features:
+🆓 Free API Service:
+Provides a fully functional REST API for the case study, built using Next.js API routes.
 
-- This project has been created to allow our candidates to check, discover and try how the api works for the case we ask from them.
-- We provide a free api service for our case study with this project. It is a full-stack project with fully customizable api endpoints.
-- The focus was mainly on api endpoints rather than frontend optimization. Most of frontend can be optimized and developed with custom hooks and data fetching libraries.
+🛠️ Full-Stack Architecture:
+A full-stack project with customizable API endpoints that candidates can extend and modify based on the case requirements.
+
+📊 API Endpoints Available:
+
+GET /getAll – Fetch all items
+GET /getById/:id – Fetch a specific item by ID
+POST /payment – Process payments
+GET /payment – Gets payment contract
+🔑 Note: All API calls must be made using the JWT token obtained from the /sign-in route. Include the token in the Authorization header as follows:
+Authorization: Bearer <your-jwt-token>
+
+💳 E-commerce Focus:
+The API simulates a real-world e-commerce platform and can be used to build storefronts, cart features, and payment workflows.
+
+🔐 Test with Default Credentials:
+Candidates can use default credentials to test API calls without extra setup.
+
+🎯 Frontend is Minimal:
+The primary focus is on API functionality. The frontend can be optimized further using custom hooks and data-fetching libraries like react-query or SWR.
+
+💡 Tip: Use tools like Postman or Insomnia to test API calls directly, or integrate them into a frontend of your choice!
 
 ## Technologies
 
@@ -25,20 +47,3 @@ yarn dev
 pnpm dev
 ```
 
-// import { withAuth } from "next-auth/middleware";
-
-// // More on how NextAuth.js middleware works: https://next-auth.js.org/configuration/nextjs#middleware
-// export default withAuth({
-// callbacks: {
-// authorized({ req, token }) {
-// // `/admin` requires admin role
-// if (req.nextUrl.pathname === "/dashboard") {
-// return token?.userRole === "admin";
-// }
-// // `/me` only requires the user to be logged in
-// return !!token;
-// },
-// },
-// });
-
-// export const config = { matcher: ["/dashboard"] };
