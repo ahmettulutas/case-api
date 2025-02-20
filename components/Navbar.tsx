@@ -49,7 +49,7 @@ const Navbar = () => {
               className="border-2 border-gray-800 p-2 block"
               onClick={handleSignOut}
             >
-              Sign out
+              sign out
             </button>
           </li>
         ) : null}
