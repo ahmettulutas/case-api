@@ -9,7 +9,10 @@ import useFetchData from "@/hooks/useFetchData";
 import JsonContainer from "./JsonContainer";
 
 export default function SignInForm() {
-  const initialFormState = { email: "", code: "" } as const;
+  const initialFormState = {
+    email: "test@gmail.com",
+    code: "NOWL-69",
+  } as const;
   const [userInfo, setUserInfo] =
     React.useState<typeof initialFormState>(initialFormState);
   const { data, loading, error, trigger } = useFetchData<UserResponse>();

@@ -59,7 +59,7 @@ export const POST = async (
       { status: 200 }
     );
     return response;
-  } catch (err: any) {
+  } catch (err) {
     return NextResponse.json(
       { message: "Error! An error occured.", error: err },
       { status: 500 }

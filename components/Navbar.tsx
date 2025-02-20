@@ -32,7 +32,7 @@ const Navbar = () => {
 
   return (
     <nav className="grid grid-cols-2 gap-2 items-center w-full">
-      <div className="col-span-2 md:col-span-1 w-40 h-16 flex mr-auto relative">
+      <div className="col-span-2 md:col-span-1 w-16 h-16 flex mr-auto relative">
         <Image priority src="/logo.svg" fill alt="logo" />
       </div>
       <ul className="col-span-2 md:col-span-1 flex gap-2 ml-auto items-center flex-wrap">
@@ -49,7 +49,7 @@ const Navbar = () => {
               className="border-2 border-gray-800 p-2 block"
               onClick={handleSignOut}
             >
-              sign out
+              Sign out
             </button>
           </li>
         ) : null}
