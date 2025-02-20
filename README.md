@@ -1,4 +1,5 @@
-📖 What Does This Project Do?
+# 📖 What Does This Project Do?
+
 This project has been designed to help candidates explore, test, and understand how the provided API works for the e-commerce case study we assign.
 
 ⚡ Key Features:
