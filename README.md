@@ -1,22 +1,27 @@
 # 📖 What Does This Project Do?
 
-This project has been designed to help candidates explore, test, and understand how the provided API works for the e-commerce case study we assign.
+This project has been designed to help candidates **explore, test, and understand** how the provided **API** works for the **e-commerce case study** we assign.
 
-⚡ Key Features:
-🆓 Free API Service:
-Provides a fully functional REST API for the case study, built using Next.js API routes.
+## ⚡ Key Features
 
-🛠️ Full-Stack Architecture:
-A full-stack project with customizable API endpoints that candidates can extend and modify based on the case requirements.
+### 🆓 Free API Service
+Provides a fully functional **REST API** for the case study, built using **Next.js API routes**.
 
-📊 API Endpoints Available:
+### 🛠️ Full-Stack Architecture
+A **full-stack** project with **customizable API endpoints** that candidates can extend and modify based on the case requirements.
 
-GET /getAll – Fetch all items
-GET /getById/:id – Fetch a specific item by ID
-POST /payment – Process payments
-GET /payment – Gets payment contract
-🔑 Note: All API calls must be made using the JWT token obtained from the /sign-in route. Include the token in the Authorization header as follows:
+### 📊 API Endpoints Available
+
+- **`GET /getAll`** – Fetch all items  
+- **`GET /getById/:id`** – Fetch a specific item by ID  
+- **`POST /payment`** – Process payments  
+- **`GET /payment`** – Get payment contract  
+
+> 🔑 **Note:** All API calls **must** be made using the **JWT token** obtained from the **`/sign-in`** route. Include the token in the **Authorization** header as follows:
+
+```bash
 Authorization: Bearer <your-jwt-token>
+```
 
 💳 E-commerce Focus:
 The API simulates a real-world e-commerce platform and can be used to build storefronts, cart features, and payment workflows.
